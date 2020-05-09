@@ -93,6 +93,5 @@ func _process(delta):
 	position.y = clamp(position.y, 0, screen_size.y)
 	
 
-
 func _on_PlayerFireTimer_timeout():
 	firing = false

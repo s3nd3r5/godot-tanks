@@ -1,6 +1,7 @@
 extends Area2D
 
-signal enemy_hit
+signal hit
+signal dead
 
 enum Dirs { UP, DOWN, LEFT, RIGHT }
 # Declare member variables here. Examples:
@@ -9,6 +10,7 @@ export var firing = false
 export var face_dir = Dirs.UP
 
 var screen_size
+var life = 5
 
 func is_facing(check_dir):
 	return face_dir == check_dir
@@ -66,9 +68,12 @@ func _process(delta):
 	position += velocity * delta
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
-	
 
-
-func _on_Enemy_body_entered(body):
-	hide()
-	emit_signal("enemy_hit")
+func _on_Enemy_area_shape_entered(area_id, area, area_shape, self_shape):
+	if area.is_in_group("projectile"):
+		area.queue_free()
+		life -= 1
+		if life <= 0:
+			queue_free()
+			emit_signal("dead")
+		emit_signal("hit")

@@ -14,5 +14,7 @@ Ball = ExtResource( 2 )
 [node name="Enemy" parent="." instance=ExtResource( 1 )]
 
 [node name="PlayerFireTimer" type="Timer" parent="."]
-[connection signal="body_entered" from="Enemy" to="Enemy" method="_on_Enemy_body_entered"]
+
+[node name="EnemyHitTimer" type="Timer" parent="."]
+[connection signal="dead" from="Enemy" to="." method="_on_Enemy_dead"]
 [connection signal="timeout" from="PlayerFireTimer" to="Player" method="_on_PlayerFireTimer_timeout"]

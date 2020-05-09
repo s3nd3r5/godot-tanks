@@ -9,10 +9,11 @@ export (PackedScene) var Ball
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Player.connect("fire", self, '_on_Player_fire')
+	$Enemy.connect("hit", self, '_on_Enemy_hit')
 	
 
 func _on_Player_fire():
-	$PlayerFireTimer.start(5)
+	$PlayerFireTimer.start(1)
 	var ball = Ball.instance()
 	add_child(ball)
 	ball.position = $Player.position
@@ -33,7 +34,9 @@ func _on_Player_fire():
 		ball.move(1, 0)
 		ball.position.x += x_offset
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _on_Enemy_hit():
 	pass
-	
+
+func _on_Enemy_dead():
+	# game_over()
+	pass # Replace with function body.

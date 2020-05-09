@@ -18,9 +18,13 @@ extents = Vector2( 7.99949, 8.09955 )
 [node name="Enemy" type="Area2D"]
 scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+[connection signal="area_shape_entered" from="." to="." method="_on_Enemy_area_shape_entered"]
