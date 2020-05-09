@@ -1,10 +1,10 @@
-extends Area2D
+extends KinematicBody2D
 
 signal fire
 
 enum Dirs { UP, DOWN, LEFT, RIGHT }
 # Declare member variables here. Examples:
-export var speed = 100
+export var speed = 4000
 
 var screen_size
 var face_dir
@@ -83,14 +83,15 @@ func _process(delta):
 		
 	# is moving
 	if velocity.length() > 0: 
-		velocity = velocity.normalized () * speed
+		velocity = velocity * speed
 		$AnimatedSprite.play()
 	else:
 		$AnimatedSprite.stop()
 		
-	position += velocity * delta
-	position.x = clamp(position.x, 0, screen_size.x)
-	position.y = clamp(position.y, 0, screen_size.y)
+	#position += velocity * delta
+	#position.x = clamp(position.x, 0, screen_size.x)
+	#position.y = clamp(position.y, 0, screen_size.y)
+	move_and_slide(velocity * delta)
 	
 
 func _on_PlayerFireTimer_timeout():
