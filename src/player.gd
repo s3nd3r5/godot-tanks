@@ -7,6 +7,7 @@ enum Dirs { UP, DOWN, LEFT, RIGHT }
 export var speed = 4000
 
 var screen_size
+var sprite_extents
 var face_dir
 var firing
 
@@ -47,6 +48,7 @@ func turn(dir):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
+	sprite_extents = get_node("CollisionShape2D").shape.extents
 	position.x = screen_size.x / 2
 	position.y = screen_size.y / 2
 	face_dir = Dirs.UP
@@ -89,10 +91,14 @@ func _process(delta):
 		$AnimatedSprite.stop()
 		
 	#position += velocity * delta
-	#position.x = clamp(position.x, 0, screen_size.x)
-	#position.y = clamp(position.y, 0, screen_size.y)
+
 	move_and_slide(velocity * delta)
-	
+	position.x = clamp(position.x,
+		sprite_extents.x,
+		screen_size.x - sprite_extents.x)
+	position.y = clamp(position.y,
+		sprite_extents.y,
+		screen_size.y - sprite_extents.y)
 
 func _on_PlayerFireTimer_timeout():
 	firing = false
