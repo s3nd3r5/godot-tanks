@@ -49,8 +49,8 @@ func turn(dir):
 func _ready():
 	screen_size = get_viewport_rect().size
 	sprite_extents = get_node("CollisionShape2D").shape.extents
-	position.x = screen_size.x / 2
-	position.y = screen_size.y / 2
+	position.x = screen_size.x
+	position.y = screen_size.y
 	face_dir = Dirs.UP
 	firing = false
 

@@ -14,8 +14,8 @@ var health
 func _ready():
 	connect("area_shape_entered", self, '_on_House_area_shape_entered')
 	screen_size = get_viewport_rect().size
-	position.x = screen_size.x / 2 + 70
-	position.y = screen_size.y / 2 + 80
+	#position.x = screen_size.x / 2 + 70
+	#position.y = screen_size.y / 2 + 80
 	health = MAX_HEALTH
 	state = states.NORMAL
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ball.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Main.gd" type="Script" id=4]
 [ext_resource path="res://House.tscn" type="PackedScene" id=5]
+[ext_resource path="res://TileMap.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 4 )
@@ -19,5 +20,24 @@ Ball = ExtResource( 2 )
 [node name="EnemyHitTimer" type="Timer" parent="."]
 
 [node name="House" parent="." instance=ExtResource( 5 )]
+position = Vector2( 592, 520 )
+
+[node name="TileMap" parent="." instance=ExtResource( 6 )]
+z_index = -1
+
+[node name="House2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 656, 520 )
+
+[node name="House3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 360, 224 )
+
+[node name="House4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 272, 464 )
+
+[node name="House5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 80, 432 )
+
+[node name="House6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 352, 144 )
 [connection signal="dead" from="Enemy" to="." method="_on_Enemy_dead"]
 [connection signal="timeout" from="PlayerFireTimer" to="Player" method="_on_PlayerFireTimer_timeout"]
