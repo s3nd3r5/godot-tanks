@@ -19,20 +19,10 @@ func _on_Player_fire():
 	ball.position = $Player.position
 	
 	var y_offset = $Player.get_node("CollisionShape2D").shape.extents.y * 2
-	var x_offset = $Player.get_node("CollisionShape2D").shape.extents.x * 2
+	var vec_offset = Vector2(0, -y_offset).rotated($Player.rotation)
 	
-	if $Player.is_facing($Player.Dirs.UP):
-		ball.move(0, -1)
-		ball.position.y -= y_offset
-	elif $Player.is_facing($Player.Dirs.DOWN):
-		ball.move(0, 1)
-		ball.position.y += y_offset
-	elif $Player.is_facing($Player.Dirs.LEFT):
-		ball.move(-1, 0)
-		ball.position.x -= x_offset
-	elif $Player.is_facing($Player.Dirs.RIGHT):
-		ball.move(1, 0)
-		ball.position.x += x_offset
+	ball.velocity = Vector2(0, -1).rotated($Player.rotation)
+	ball.position += vec_offset
 
 func _on_Enemy_hit():
 	pass

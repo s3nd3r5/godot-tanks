@@ -44,5 +44,8 @@ position = Vector2( 352, 144 )
 
 [node name="House7" parent="." instance=ExtResource( 5 )]
 position = Vector2( 656, 144 )
+
+[node name="House8" parent="." instance=ExtResource( 5 )]
+position = Vector2( 176, 80 )
 [connection signal="dead" from="Enemy" to="." method="_on_Enemy_dead"]
 [connection signal="timeout" from="PlayerFireTimer" to="Player" method="_on_PlayerFireTimer_timeout"]
