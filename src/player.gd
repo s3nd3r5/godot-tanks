@@ -13,7 +13,7 @@ var firing
 
 func is_facing(check_dir):
 	return face_dir == check_dir
-	
+
 func turn(dir):
 	if is_facing(Dirs.LEFT):
 		if dir == Dirs.UP:
@@ -57,42 +57,36 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var velocity = Vector2()
-	
+	var move_dir
+
 	if Input.is_action_pressed("ui_right"):
-		if is_facing(Dirs.RIGHT):
-			velocity.x += 1
-		else:
-			turn(Dirs.RIGHT)
+		move_dir = Dirs.RIGHT
+		velocity.x += 1
 	elif Input.is_action_pressed("ui_left"):
-		if is_facing(Dirs.LEFT):
-			velocity.x -= 1
-		else:
-			turn(Dirs.LEFT)
+		move_dir = Dirs.LEFT
+		velocity.x -= 1
 	elif Input.is_action_pressed("ui_up"):
-		if is_facing(Dirs.UP):
-			velocity.y -= 1
-		else:
-			turn(Dirs.UP)
+		move_dir = Dirs.UP
+		velocity.y -= 1
 	elif Input.is_action_pressed("ui_down"):
-		if is_facing(Dirs.DOWN):
-			velocity.y += 1
-		else:
-			turn(Dirs.DOWN)
-		
+		move_dir = Dirs.DOWN
+		velocity.y += 1
+
 	if Input.is_action_pressed("ui_fire") && !firing:
 		emit_signal("fire")
 		firing = true
-		
-	# is moving
-	if velocity.length() > 0: 
+
+	if move_dir == null:
+		$AnimatedSprite.stop()
+	elif !is_facing(move_dir):
+		turn(move_dir)
+		$AnimatedSprite.stop()
+	else: # move
 		velocity = velocity * speed
 		$AnimatedSprite.play()
-	else:
-		$AnimatedSprite.stop()
-		
-	#position += velocity * delta
 
 	move_and_slide(velocity * delta)
+
 	position.x = clamp(position.x,
 		sprite_extents.x,
 		screen_size.x - sprite_extents.x)
