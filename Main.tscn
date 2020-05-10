@@ -12,32 +12,37 @@ script = ExtResource( 4 )
 Ball = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 336, 560 )
 
 [node name="Enemy" parent="." instance=ExtResource( 1 )]
+position = Vector2( 352, 64 )
 
 [node name="PlayerFireTimer" type="Timer" parent="."]
 
 [node name="EnemyHitTimer" type="Timer" parent="."]
 
 [node name="House" parent="." instance=ExtResource( 5 )]
-position = Vector2( 592, 520 )
+position = Vector2( 560, 512 )
 
 [node name="TileMap" parent="." instance=ExtResource( 6 )]
 z_index = -1
 
 [node name="House2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 656, 520 )
+position = Vector2( 688, 512 )
 
 [node name="House3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 360, 224 )
+position = Vector2( 408, 352 )
 
 [node name="House4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 272, 464 )
 
 [node name="House5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 80, 432 )
+position = Vector2( 112, 288 )
 
 [node name="House6" parent="." instance=ExtResource( 5 )]
 position = Vector2( 352, 144 )
+
+[node name="House7" parent="." instance=ExtResource( 5 )]
+position = Vector2( 656, 144 )
 [connection signal="dead" from="Enemy" to="." method="_on_Enemy_dead"]
 [connection signal="timeout" from="PlayerFireTimer" to="Player" method="_on_PlayerFireTimer_timeout"]

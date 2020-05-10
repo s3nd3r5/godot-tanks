@@ -49,8 +49,8 @@ func turn(dir):
 func _ready():
 	screen_size = get_viewport_rect().size
 	sprite_extents = get_node("CollisionShape2D").shape.extents
-	position.x = screen_size.x
-	position.y = screen_size.y
+	# position.x = screen_size.x
+	# position.y = screen_size.y
 	face_dir = Dirs.UP
 	firing = false
 
@@ -79,7 +79,7 @@ func _process(delta):
 		else:
 			turn(Dirs.DOWN)
 		
-	if Input.is_key_pressed(KEY_SPACE) && !firing:
+	if Input.is_action_pressed("ui_fire") && !firing:
 		emit_signal("fire")
 		firing = true
 		
